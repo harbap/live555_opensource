@@ -43,6 +43,12 @@ all:
 	@echo
 	@echo "For more information about this source code (including your obligations under the LGPL), please see our FAQ at http://live555.com/liveMedia/faq.html"
 
+lib_install:
+	cp ./BasicUsageEnvironment/*.a /workdir/live555/live555_rtsp_live_v4l2/lib/livelib -f
+	cp ./groupsock/*.a /workdir/live555/live555_rtsp_live_v4l2/lib/livelib -f
+	cp ./liveMedia/*.a /workdir/live555/live555_rtsp_live_v4l2/lib/livelib -f
+	cp ./UsageEnvironment/*.a /workdir/live555/live555_rtsp_live_v4l2/lib/livelib -f
+	
 install:
 	cd $(LIVEMEDIA_DIR) ; $(MAKE) install
 	cd $(GROUPSOCK_DIR) ; $(MAKE) install

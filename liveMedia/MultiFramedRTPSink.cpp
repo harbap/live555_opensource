@@ -53,7 +53,8 @@ MultiFramedRTPSink::MultiFramedRTPSink(UsageEnvironment& env,
 	    rtpPayloadFormatName, numChannels),
     fOutBuf(NULL), fCurFragmentationOffset(0), fPreviousFrameEndedFragmentation(False),
     fOnSendErrorFunc(NULL), fOnSendErrorData(NULL) {
-  setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (RTP_PAYLOAD_MAX_SIZE));
+  //setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (RTP_PAYLOAD_MAX_SIZE));
+  setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (8192));
 }
 
 MultiFramedRTPSink::~MultiFramedRTPSink() {
