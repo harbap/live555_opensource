@@ -35,7 +35,7 @@ void MultiFramedRTPSink::setPacketSizes(unsigned preferredPacketSize,
 }
 
 #ifndef RTP_PAYLOAD_MAX_SIZE
-#define RTP_PAYLOAD_MAX_SIZE 1452
+#define RTP_PAYLOAD_MAX_SIZE 		1500		//1452
       // Default max packet size (1500, minus allowance for IP, UDP headers)
       // (Also, make it a multiple of 4 bytes, just in case that matters.)
 #endif
@@ -54,7 +54,7 @@ MultiFramedRTPSink::MultiFramedRTPSink(UsageEnvironment& env,
     fOutBuf(NULL), fCurFragmentationOffset(0), fPreviousFrameEndedFragmentation(False),
     fOnSendErrorFunc(NULL), fOnSendErrorData(NULL) {
   //setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (RTP_PAYLOAD_MAX_SIZE));
-  setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (8192));
+  setPacketSizes((RTP_PAYLOAD_PREFERRED_SIZE), (8192*2));
 }
 
 MultiFramedRTPSink::~MultiFramedRTPSink() {
@@ -364,6 +364,7 @@ Boolean MultiFramedRTPSink::isTooBigForAPacket(unsigned numBytes) const {
 }
 
 void MultiFramedRTPSink::sendPacketIfNecessary() {
+
   if (fNumFramesUsedSoFar > 0) {
     // Send the packet:
 #ifdef TEST_LOSS
@@ -404,6 +405,7 @@ void MultiFramedRTPSink::sendPacketIfNecessary() {
     // We have more frames left to send.  Figure out when the next frame
     // is due to start playing, then make sure that we wait this long before
     // sending the next packet.
+    #if 0
     struct timeval timeNow;
     gettimeofday(&timeNow, NULL);
     int secsDiff = fNextSendTime.tv_sec - timeNow.tv_sec;
@@ -414,7 +416,12 @@ void MultiFramedRTPSink::sendPacketIfNecessary() {
 
     // Delay this amount of time:
     nextTask() = envir().taskScheduler().scheduleDelayedTask(uSecondsToGo, (TaskFunc*)sendNext, this);
+	#else
+
+  	sendNext(this);
+  	#endif
   }
+
 }
 
 // The following is called after each delay between packet sends:

@@ -108,7 +108,7 @@ int main(int argc, char** argv) {
 
     announceStream(rtspServer, sms, streamName, inputFileName);
   }
-
+#if 0
   // A H.265 video elementary stream:
   {
     char const* streamName = "h265ESVideoTest";
@@ -428,6 +428,7 @@ int main(int argc, char** argv) {
     *env << " port " << inputPortNum << ")\n";
     announceURL(rtspServer, sms);
   }
+  #endif
 
   // Also, attempt to create a HTTP server for RTSP-over-HTTP tunneling.
   // Try first with the default HTTP port (80), and then with the alternative HTTP

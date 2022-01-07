@@ -5,6 +5,7 @@
 *.lib
 *.si4project
 *.d
+*.vscode
 hlsProxy/live555HLSProxy
 mediaServer/live555MediaServer
 proxyServer/live555ProxyServer

@@ -24,6 +24,7 @@ along with this library; if not, write to the Free Software Foundation, Inc.,
 #include <GroupsockHelper.hh>
 #include <stdio.h>
 
+//#define DEBUG_SEND
 ////////// Helper Functions - Definition //////////
 
 // Helper routines and data structures, used to implement
@@ -137,7 +138,7 @@ RTPInterface::RTPInterface(Medium* owner, Groupsock* gs)
   // even if the socket was previously reported (e.g., by "select()") as having data available.
   // (This can supposedly happen if the UDP checksum fails, for example.)
   makeSocketNonBlocking(fGS->socketNum());
-  increaseSendBufferTo(envir(), fGS->socketNum(), 512*1024);			//50*1024  hsl
+  increaseSendBufferTo(envir(), fGS->socketNum(), 1024*1024);			//50*1024  hsl
 }
 
 RTPInterface::~RTPInterface() {
